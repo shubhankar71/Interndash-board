@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Intern Dashboard (Auto Mode)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .notice {
+      background-color: #f8f9fa;
+      border-left: 4px solid #28a745;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login/Signup View -->
+  <div id="auth-view" class="centered">
+    <h2>Intern Portal (Auto Mode)</h2>
+    <input type="text" id="name" placeholder="Enter your name" required />
+    <input type="email" id="email" placeholder="Enter your email" required />
+    <input type="password" id="password" placeholder="Enter your password" required />
+    <button id="login-btn">Create Dashboard</button>
+    <div class="notice">
+      <p>✅ Auto Dashboard Mode: Fill in your details and click to generate your dashboard.</p>
+      <p>No data will be saved for future use - this is for demonstration only.</p>
+    </div>
+  </div>
+
+  <!-- Dashboard View -->
+  <div id="dashboard-view" style="display: none">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>Intern Panel</h2>
+      <ul>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Tasks</a></li>
+        <li><a href="#">Reports</a></li>
+        <li><a href="#">Feedback</a></li>
+        <li><a href="#" id="logout-btn">Logout</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+      <div class="header">
+        <span id="menu-btn">&#9776;</span>
+        <span id="intern-welcome"></span>
+        <div class="profile">👤</div>
+      </div>
+
+      <div class="content">
+        <h1>Dashboard</h1>
+        <div class="info-card">
+          <strong>Name: </strong><span id="intern-name"></span><br/>
+          <strong>Email: </strong><span id="intern-email"></span><br/>
+          <strong>Referral Code: </strong><span id="referral-code"></span><br/>
+          <strong>Total Donations Raised: </strong>₹<span id="donations"></span>
+        </div>
+
+        <h2>Rewards & Unlockables</h2>
+        <ul class="rewards-list">
+          <li>🎁 Bronze Badge (₹1,000+)</li>
+          <li>🥈 Silver Badge (₹5,000+)</li>
+          <li>🥇 Gold Badge (₹10,000+)</li>
+          <li>🎫 Amazon Gift Voucher (₹15,000+)</li>
+        </ul>
+        
+        <div class="notice">
+          <p>✅ Auto Dashboard Mode: This dashboard was created automatically from your input.</p>
+          <p>No data has been saved - refreshing the page will reset everything.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Get elements
+    const loginBtn = document.getElementById("login-btn");
+    const logoutBtn = document.getElementById("logout-btn");
+    const menuBtn = document.getElementById("menu-btn");
+
+    const authView = document.getElementById("auth-view");
+    const dashboardView = document.getElementById("dashboard-view");
+    const sidebar = document.querySelector(".sidebar");
+
+    const internWelcome = document.getElementById("intern-welcome");
+    const internNameSpan = document.getElementById("intern-name");
+    const internEmailSpan = document.getElementById("intern-email");
+    const referralCodeSpan = document.getElementById("referral-code");
+    const donationsSpan = document.getElementById("donations");
+
+    // Fixed donation amount for all users
+    const fixedDonation = 5000;
+
+    // Auto dashboard handler - never saves data
+    loginBtn.addEventListener("click", () => {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!name || !email || !password) {
+        alert("Please fill in all fields.");
+        return;
+      }
+      
+      // Create user data directly (no server call, no storage)
+      const intern = {
+        name,
+        email,
+        referralCode: name.toLowerCase().replace(/\s+/g, "") + "2005",
+        donations: fixedDonation
+      };
+      
+      // Update dashboard
+      internWelcome.textContent = intern.name;
+      internNameSpan.textContent = intern.name;
+      internEmailSpan.textContent = intern.email;
+      referralCodeSpan.textContent = intern.referralCode;
+      donationsSpan.textContent = intern.donations;
+
+      // Toggle view
+      authView.style.display = "none";
+      dashboardView.style.display = "flex";
+      
+      // Log to console (for demonstration only)
+      console.log("Dashboard created with:", intern);
+      console.log("No data has been saved to any storage");
+    });
+
+    logoutBtn.addEventListener("click", () => {
+      // Reset fields
+      document.getElementById("name").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("password").value = "";
+
+      // Switch views
+      dashboardView.style.display = "none";   
+      authView.style.display = "flex";
+    });
+
+    // Add menu button functionality to toggle sidebar
+    menuBtn.addEventListener("click", () => {
+      // Check if sidebar is visible
+      const isSidebarVisible = sidebar.style.display !== "none";
+      
+      // Toggle sidebar visibility
+      sidebar.style.display = isSidebarVisible ? "none" : "block";
+      
+      // Adjust main content margin when sidebar is hidden
+      const main = document.querySelector(".main");
+      main.style.marginLeft = isSidebarVisible ? "0" : "220px";
+    });
+  </script>
+</body>
+</html>

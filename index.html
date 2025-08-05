@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Intern Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    // Check if we're on GitHub Pages
+    if (window.location.hostname.includes('github.io')) {
+      window.location.href = 'github-pages.html';
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Login/Signup View -->
+  <div id="auth-view" class="centered">
+    <h2>Intern Portal</h2>
+    <input type="text" id="name" placeholder="Enter your name" required />
+    <input type="email" id="email" placeholder="Enter your email" required />
+    <input type="password" id="password" placeholder="Enter your password" required />
+    <button id="login-btn">Login / Signup</button>
+  </div>
+
+  <!-- Dashboard View -->
+  <div id="dashboard-view" style="display: none">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>Intern Panel</h2>
+      <ul>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Tasks</a></li>
+        <li><a href="#">Reports</a></li>
+        <li><a href="#">Feedback</a></li>
+        <li><a href="#" id="logout-btn">Logout</a></li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+      <div class="header">
+        <span id="menu-btn">&#9776;</span>
+        <span id="intern-welcome"></span>
+        <div class="profile">👤</div>
+      </div>
+
+      <div class="content">
+        <h1>Dashboard</h1>
+        <div class="info-card">
+          <strong>Name: </strong><span id="intern-name"></span><br/>
+          <strong>Email: </strong><span id="intern-email"></span><br/>
+          <strong>Referral Code: </strong><span id="referral-code"></span><br/>
+          <strong>Total Donations Raised: </strong>₹<span id="donations"></span>
+        </div>
+
+        <h2>Rewards & Unlockables</h2>
+        <ul class="rewards-list">
+          <li>🎁 Bronze Badge (₹1,000+)</li>
+          <li>🥈 Silver Badge (₹5,000+)</li>
+          <li>🥇 Gold Badge (₹10,000+)</li>
+          <li>🎫 Amazon Gift Voucher (₹15,000+)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
