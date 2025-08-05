@@ -24,7 +24,7 @@ A simple dashboard application for interns to track their referrals and donation
    ```
 4. Start the server:
    ```
-   npm start
+   node server.js
    ```
 5. Open your browser and navigate to `http://localhost:3000`
 
